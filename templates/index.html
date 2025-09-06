@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Breast Cancer Prediction</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 40px; 
+            background: linear-gradient(135deg, #ff6b9d, #e91e63); 
+            color: black; 
+        }
+        h1 { 
+            color: black; 
+            text-align: center; 
+            font-size: 28px; 
+            font-weight: bold; 
+        }
+        form { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 10px; 
+            max-width: 800px; 
+            margin: auto; 
+            background: rgba(255, 255, 255, 0.9); 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); 
+        }
+        label { 
+            font-weight: bold; 
+            color: black; 
+        }
+        input { 
+            padding: 8px; 
+            border: 1px solid #ccc; 
+            border-radius: 6px; 
+            color: black; 
+        }
+        button { 
+            grid-column: span 2; 
+            padding: 12px; 
+            background: #e91e63; 
+            color: #fff; 
+            font-size: 16px; 
+            font-weight: bold; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        button:hover { 
+            background: #ff6b9d; 
+            transform: scale(1.05); 
+        }
+        .result { 
+            margin-top: 20px; 
+            font-size: 20px; 
+            font-weight: bold; 
+            color: black; 
+            text-align: center; 
+            background: #fff; 
+            padding: 12px; 
+            border-radius: 8px; 
+            box-shadow: 0px 3px 8px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <h1>Detect"HER"</h1>
+    <form action="/predict" method="post">
+        <!-- Mean Values -->
+        <label>Mean Radius:</label><input type="number" step="any" name="mean_radius" required>
+        <label>Mean Texture:</label><input type="number" step="any" name="mean_texture" required>
+        <label>Mean Perimeter:</label><input type="number" step="any" name="mean_perimeter" required>
+        <label>Mean Area:</label><input type="number" step="any" name="mean_area" required>
+        <label>Mean Smoothness:</label><input type="number" step="any" name="mean_smoothness" required>
+        <label>Mean Compactness:</label><input type="number" step="any" name="mean_compactness" required>
+        <label>Mean Concavity:</label><input type="number" step="any" name="mean_concavity" required>
+        <label>Mean Concave Points:</label><input type="number" step="any" name="mean_concave_points" required>
+        <label>Mean Symmetry:</label><input type="number" step="any" name="mean_symmetry" required>
+        <label>Mean Fractal Dimension:</label><input type="number" step="any" name="mean_fractal_dimension" required>
+
+        <!-- Error Values -->
+        <label>Radius Error:</label><input type="number" step="any" name="radius_error" required>
+        <label>Texture Error:</label><input type="number" step="any" name="texture_error" required>
+        <label>Perimeter Error:</label><input type="number" step="any" name="perimeter_error" required>
+        <label>Area Error:</label><input type="number" step="any" name="area_error" required>
+        <label>Smoothness Error:</label><input type="number" step="any" name="smoothness_error" required>
+        <label>Compactness Error:</label><input type="number" step="any" name="compactness_error" required>
+        <label>Concavity Error:</label><input type="number" step="any" name="concavity_error" required>
+        <label>Concave Points Error:</label><input type="number" step="any" name="concave_points_error" required>
+        <label>Symmetry Error:</label><input type="number" step="any" name="symmetry_error" required>
+        <label>Fractal Dimension Error:</label><input type="number" step="any" name="fractal_dimension_error" required>
+
+        <!-- Worst Values -->
+        <label>Worst Radius:</label><input type="number" step="any" name="worst_radius" required>
+        <label>Worst Texture:</label><input type="number" step="any" name="worst_texture" required>
+        <label>Worst Perimeter:</label><input type="number" step="any" name="worst_perimeter" required>
+        <label>Worst Area:</label><input type="number" step="any" name="worst_area" required>
+        <label>Worst Smoothness:</label><input type="number" step="any" name="worst_smoothness" required>
+        <label>Worst Compactness:</label><input type="number" step="any" name="worst_compactness" required>
+        <label>Worst Concavity:</label><input type="number" step="any" name="worst_concavity" required>
+        <label>Worst Concave Points:</label><input type="number" step="any" name="worst_concave_points" required>
+        <label>Worst Symmetry:</label><input type="number" step="any" name="worst_symmetry" required>
+        <label>Worst Fractal Dimension:</label><input type="number" step="any" name="worst_fractal_dimension" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    <!-- Display prediction result -->
+    {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+    {% endif %}
+</body>
+</html>
